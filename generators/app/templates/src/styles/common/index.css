@@ -1,0 +1,89 @@
+* {
+    outline: none;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background-color: #f7f7f7;
+    color: #333;
+    font-family: "HeiTi SC", "Microsoft YaHei", "Helvetica neue", "Arial", sans-serif;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+em {
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/**
+ * 针对ie9及以下bug，有2px的边框
+ */
+
+a img {
+    border: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-size: 1em;
+    font-weight: normal;
+}
+
+
+/**
+ * common used class
+ */
+
+:global .remi-html .remi-body .none {
+    display: none;
+}
+
+:global .clearfix:before {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+:global .clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+:global .left {
+    float: left;
+}
+:global .right {
+    float: right;
+}
+
+:global .remi-wrap {
+    min-height: 100%;
+}

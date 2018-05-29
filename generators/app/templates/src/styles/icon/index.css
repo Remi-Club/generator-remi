@@ -1,0 +1,15 @@
+/**
+ * 命名规则
+ * 名称 + 修饰词（形容词或名词）
+ */
+.icon{
+    display: inline-block;
+    background: center/100% no-repeat;
+}
+
+.checked{
+    composes: icon;
+    width: 20px;
+    height: 20px;
+    background-image: url('./checked.png');
+}
