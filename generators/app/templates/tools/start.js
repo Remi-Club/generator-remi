@@ -12,7 +12,7 @@ var server = new WebpackDevServer(compile, {
     publicPath: config.output.publicPath,
     hot: true,
     inline: true,
-    quiet: false,
+    quiet: true, // if using webpack-dashboard, you should set true, otherwith set false.
     historyApiFallback: true,
     stats: {
         colors: true
