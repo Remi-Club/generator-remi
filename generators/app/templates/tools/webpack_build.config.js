@@ -15,7 +15,6 @@ let currentProgress = 0;
 module.exports = {
     devtool: 'hidden-source-map',
     mode: 'production',
-
     entry: {
         entry: './src/entry.js'
     },

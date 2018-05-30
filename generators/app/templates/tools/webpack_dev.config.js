@@ -10,7 +10,6 @@ var theme = require('./theme');
 module.exports = {
     devtool: 'source-map',
     mode: 'development',
-
     entry: {
         entry: ['./src/entry.js']
     },
