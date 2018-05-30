@@ -29,7 +29,7 @@ module.exports = class extends Generator {
 			destinationRoot,
 			this.answers
 		);
-		const files = ['.babelrc', '.editorconfig', '.eslintrc', '.gitignore'];
+		const files = ['.babelrc', '.editorconfig', '.eslintrc'];
 		files.forEach((v) => {
 			this.fs.copyTpl(this.templatePath(v), this.destinationPath(v));
 		});
