@@ -18,5 +18,6 @@
     "chalk": "^2.4.1",
     "progress": "^2.0.0",
     "yeoman-generator": "^2.0.5"
-  }
+  },
+  "repository": "https://github.com/Remi-Club/generator-remi.git"
 }
