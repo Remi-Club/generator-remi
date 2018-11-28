@@ -13,7 +13,7 @@ var bar = new ProgressBar(chalk.magenta('Compiling [:bar] :percent'), {
 let currentProgress = 0;
 
 module.exports = {
-    devtool: 'hidden-source-map',
+    devtool: process.env.__STAGE__ === 'production' ? 'hidden-source-map' : 'source-map',
     mode: 'production',
     entry: {
         entry: './src/entry.js'
@@ -68,7 +68,10 @@ module.exports = {
             let t = Math.floor(percentage * 100);
             bar.tick(t - currentProgress);
             currentProgress = t;
-        })
+        }),
+        new webpack.DefinePlugin({
+            __STAGE__: JSON.stringify(process.env.__STAGE__)
+        }),
     ],
     optimization: {
         minimize: true

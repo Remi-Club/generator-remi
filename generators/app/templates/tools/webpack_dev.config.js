@@ -62,6 +62,9 @@ module.exports = {
         new webpack.ContextReplacementPlugin(/moment[\\\/]locale$/, /^\.\/(zh-cn)$/),
         new webpack.HotModuleReplacementPlugin(),
         new BundleAnalyzerPlugin(),
+        new webpack.DefinePlugin({
+            __STAGE__: JSON.stringify('development')
+        }),
     ],
     resolve: {
         extensions: ['.js', '.jsx'],
