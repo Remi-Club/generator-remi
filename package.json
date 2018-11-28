@@ -1,6 +1,6 @@
 {
   "name": "generator-remi",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "remi yeoman-generator",
   "main": "index.js",
   "scripts": {
