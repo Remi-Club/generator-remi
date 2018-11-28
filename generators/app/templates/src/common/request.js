@@ -2,7 +2,6 @@
 
 let superagent = require('superagent');
 let config = require('common/config');
-const log = require('utils/log');
 import user from 'utils/user';
 import eventEmitter from 'utils/eventEmitter';
 
@@ -39,22 +38,22 @@ async function Request({
 Request.prototype = {
 	constructor: Request,
 
-	getUrl: function(url) {
+	getUrl: function (url) {
 		if (/^http/.test(url)) {
 			return url;
 		}
 		return url[0] === '/' ? config.API_ROOT + url : config.API_ROOT + '/' + url;
 	},
-	getType: function(type) {
+	getType: function (type) {
 		type = type ? type.toUpperCase() : 'POST';
 		return type === 'GET' ? 'GET' : 'POST';
 	},
-	addClientType: function() {
+	addClientType: function () {
 		this.request.query({
 			p: 'wechat'
 		});
 	},
-	addAuthInfo: async function() {
+	addAuthInfo: async function () {
 		let userInfo = user.get();
 		let token = null;
 		if (userInfo) {
@@ -65,36 +64,25 @@ Request.prototype = {
 			t: Date.now()
 		});
 	},
-	execute: function({
+	execute: function ({
 		success,
 		fail,
 		error,
 		data
 	}) {
 		this.startTime = Date.now();
-		this.request.end(function(err, res) {
+		this.request.end(function (err, res) {
 			if (err) {
-				console.log('request err:', err);
+				console.error('request err:', err);
 				error && error();
-				return ;
+				return;
 			}
-			log.saveAPI({
-				url: this.url,
-				time: Date.now() - this.startTime
-			});
 			let body = res.body;
-			console.log(this.url + ' data:', data);
-			console.log(this.url + ' body:', body);
 			let errcode = body.errcode;
 			if (errcode !== 0) {
-				log.saveBuss({
-					errcode: errcode,
-					errmsg: body.errmsg,
-					url: this.url
-				});
 				if (_isNeedLoginByErrorCode(errcode)) {
 					eventEmitter.emit('NEED_RELOGIN');
-					return ;
+					return;
 				}
 				return fail && fail(body);
 			}
@@ -115,15 +103,15 @@ function _isNeedLoginByErrorCode(v) {
 
 
 let request = {
-	get: function(options) {
+	get: function (options) {
 		options.type = 'GET';
 		new Request(options);
 	},
-	post: function(options) {
+	post: function (options) {
 		options.type = 'POST';
 		new Request(options);
 	},
-	ajax: function(options) {
+	ajax: function (options) {
 		new Request(options);
 	}
 };
