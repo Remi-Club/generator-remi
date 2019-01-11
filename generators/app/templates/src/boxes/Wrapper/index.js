@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import style from './index.css';
+require('utils/changeConsole');
 import moment from 'moment';
 moment.updateLocale('zh-cn', {
     weekdaysShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
@@ -16,10 +17,7 @@ import 'antd/dist/antd.less';
 
 import {Route, Switch, Redirect, Link} from 'react-router-dom';
 import Loadable from 'react-loadable';
-
-function Loading(){
-    return '...loading';
-}
+import Loading from 'boxes/Loading';
 
 const Profile = Loadable({
     loader: () => import('boxes/Profile'),
