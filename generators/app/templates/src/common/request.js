@@ -50,19 +50,18 @@ Request.prototype = {
 	},
 	addClientType: function () {
 		this.request.query({
-			p: 'wechat'
+			p: '<%=name>'
 		});
 	},
 	addAuthInfo: async function () {
-		let userInfo = user.get();
-		let token = null;
+		const userInfo = user.get();
 		if (userInfo) {
-			token = userInfo.token;
+			const { token } = userInfo;
+			this.request.query({
+				token,
+			});
 		}
-		this.request.query({
-			token,
-			t: Date.now()
-		});
+
 	},
 	execute: function ({
 		success,
@@ -70,17 +69,16 @@ Request.prototype = {
 		error,
 		data
 	}) {
-		this.startTime = Date.now();
 		this.request.end(function (err, res) {
 			if (err) {
 				console.error('request err:', err);
 				error && error();
 				return;
 			}
-			let body = res.body;
-			let errcode = body.errcode;
-			if (errcode !== 0) {
-				if (_isNeedLoginByErrorCode(errcode)) {
+			const body = res.body;
+			const code = body.code;
+			if (code !== 0) {
+				if (_isNeedLoginByErrorCode(code)) {
 					eventEmitter.emit('NEED_RELOGIN');
 					return;
 				}
