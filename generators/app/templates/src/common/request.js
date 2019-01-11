@@ -50,7 +50,7 @@ Request.prototype = {
 	},
 	addClientType: function () {
 		this.request.query({
-			p: '<%=name>'
+			p: '<%=name%>'
 		});
 	},
 	addAuthInfo: async function () {
